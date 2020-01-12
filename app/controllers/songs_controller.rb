@@ -24,7 +24,12 @@ class SongsController < ApplicationController
     end
   end
 
-  def new
+  def new 
+     @answer =  Admin::PreferencesHelper.is_ok?  
+    if @answer.allow_create_songs == false
+    
+      redirect_to songs_path
+    end 
     @song = Song.new
   end
 

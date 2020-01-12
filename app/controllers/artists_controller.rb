@@ -7,7 +7,12 @@ class ArtistsController < ApplicationController
     @artist = Artist.find(params[:id])
   end
 
-  def new
+  def new 
+    @answer =  Admin::PreferencesHelper.is_ok?  
+    if @answer.allow_create_artists == false
+    
+      redirect_to artists_path
+    end 
     @artist = Artist.new
   end
 
